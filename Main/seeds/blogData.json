@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Introduction to Javascript",
+    "blog_content": "A mobile app that will send you notifications whenever a concert is playing in your area.",
+    "user_id": 1
+  },
+  {
+    "title": "The importance of HTML/CSS",
+    "blog_content": "A mobile app that will send you notifications whenever a concert is playing in your area.",
+    "user_id": 1
+  },
+  {
+    "title": "How To: Conditionals",
+    "blog_content": "A mobile app that will send you notifications whenever a concert is playing in your area.",
+    "user_id": 2
+  },
+  {
+    "title": "In for A Loop",
+    "blog_content": "A mobile app that will send you notifications whenever a concert is playing in your area.",
+    "user_id": 3
+  }
+]

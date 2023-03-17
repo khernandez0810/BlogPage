@@ -6,10 +6,19 @@ const withAuth = require('../../utils/auth')
 //Get all blogs with associated Users and comments
 router.get("/", (req, res) => {
     Blog.findAll({
-        include:[User, Comment]
+       include: [{
+        model:Comment,
+        include: {
+            model:User,
+            attributes: ['username']
+        }
+    },{
+        model:User,
+        attributes:['username']
+    }]
     })
     .then(blogs => {
-        res.json(blogs);
+        res.status(200).json(blogs);
     })
     .catch(err => {
         res.status(500).json(err)
@@ -17,27 +26,34 @@ router.get("/", (req, res) => {
 });
 
 //get one blog with associated user and comment
-router.get("/:id", (req,res) => {
+router.get('/:id', (req, res) => {
     Blog.findByPk(req.params.id, {
-        include:[User,Comment]
+        attributes: ['title'],
+       include: [{
+        model:Comment,
+        include: {
+            model:User,
+            attributes: ['username']
+        }
+    },{
+        model:User,
+        attributes:['username']
+    }]
     })
-    .then(blog => {
-        res.json(blog);
+    .then(blogs => {
+        res.status(200).json(blogs);
     })
     .catch(err => {
         res.status(500).json(err)
-    })
+    });
 });
 
 router.post("/", (req, res) => {
-    if(!req.session.user) {
-return res.status(401).json({message: "Please Log in"})
-    }
 
     Blog.create({
         title: req.body.title,
-        post_content: req.body.content,
-        userID: req.session.user.id
+        blog_content: req.body.blog_content,
+        user_id: req.session.user_id
     })
     .then(blog => {
         res.json(blog);
@@ -46,23 +62,47 @@ return res.status(401).json({message: "Please Log in"})
         res.status(500).json(err)
     })
 })
+router.put('/:id', (req, res) => {
+    Blog.update({
+        title: req.body.title,
+        blog_content: req.body.blog_content
+    },
+    {
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(blog => {
+        if(!blog){
+            res.status(404).json({message: "No blog found with this id"})
+        }
+        res.status(200).json(blog)
+    })
+})
+
+
+
+
+
 
 //delete blog post
 
-router.delete("/:id", (req, res) => {
-    if(!req.session.user) {
-        return res.status(401).json({message: "Please log in"})
-    }
-    Blog.destroy({where: {
+router.delete("/:id", async (req, res) => {
+   await Blog.destroy({where: {
         id: req.params.id
     }
 })
 .then(blog => {
+    if(!blog){
+        res.status(404).json({message: "No blog post found with this id"})
+    }
     res.json(blog);
 })
 .catch(err => {
     res.json(500).json(err)
 })
-})
+});
 
-module.export = router;
+
+
+module.exports = router;

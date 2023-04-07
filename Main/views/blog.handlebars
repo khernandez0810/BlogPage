@@ -1,15 +1,19 @@
-(#each)
-<div class="text-center">
-  <h2>hello</h2>
-  <p>hi</p>
-  <p>hi</p>
-  <p>Created by {{user.name}} on {{format_date date_created}}</p>
-  <p>
-    <span for="img" aria-label="money">💲</span>
-    <span class="dollar-amount">{{format_amount needed_funding}}</span>
-    needed
-  </p>
-  <p>
-    <button class="btn btn-primary">Fund this Project!</button>
-  </p>
+{{> blog-post}}
+{{>comments}}
+        {{#if logged_in}}
+<form class="comment-form card">
+<div class="card-header">
+        <h2>Add a New Comment!</h2>
+        </div>
+        <div class="card-body">
+  <input type="hidden" name="blog-id" value="{{blog.id}}" />
+  <textarea name="blog-id" id="comment" class="form-input commentText"></textarea>
+<button type="submit" class="btn btn-primary">Add comment</button>
 </div>
+</form>
+        {{/if}}
+        {{#if logged_in}}
+        <script src="/js/comments.js"></script>
+        {{/if}}
+</div>
+

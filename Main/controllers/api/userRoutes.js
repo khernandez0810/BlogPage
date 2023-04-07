@@ -17,8 +17,8 @@ router.get("/", async (req, res) => {
   });
 });
 
-router.get("/:id", (req, res) => {
-  User.findByPk(req.params.id, {
+router.get("/:id", async (req, res) => {
+  await User.findByPk(req.params.id, {
        include: [{
         model:Blog,
         attributes:['title', 'blog_content']
@@ -104,8 +104,8 @@ router.post('/logout', (req, res) => {
 });
 
 
-router.put('/:id', (req,res) => {
-  try {const userData = User.update(req.body, {
+router.put('/:id',async  (req,res) => {
+  try {const userData = await User.update(req.body, {
     individualHooks:true,
     where: {
       id: req.params.id

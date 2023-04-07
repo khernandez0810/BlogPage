@@ -1,13 +1,15 @@
-document.querySelector("#newComment").addEventListener("submit", event => {
+document.querySelector(".comment-form").addEventListener("submit", event => {
     event.preventDefault();
 
-const comment = {
-    body:document.querySelector("#comment").ariaValueMax.trim(),
-    blogId:document.querySelector("commentId").ariaValueMax.trim()
-}
-fetch("/api/comments", {
-    method:"POST",
-    body:JSON.stringify(comment),
+   const commentText = document.querySelector(".commentText").value.trim();
+   const blog_id = document.querySelector('input[name="blog-id"]').value.trim();
+if(commentText) {
+fetch('/api/comments', {
+    method: "POST",
+    body: JSON.stringify({
+        commentText,
+        blog_id
+    }),
     headers: {
         "Content-Type":"application/json"
     }
@@ -20,4 +22,5 @@ fetch("/api/comments", {
         alert("try again")
     }
 })
-})
+console.log(commentText, blog_id)
+}})

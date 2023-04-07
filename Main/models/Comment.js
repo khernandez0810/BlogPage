@@ -11,7 +11,7 @@ Comment.init({
     autoIncrement: true,
   },
 
-  comment_content: {
+  commentText: {
     type: DataTypes.TEXT,
     allowNull: false,
   },

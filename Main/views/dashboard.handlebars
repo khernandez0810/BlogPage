@@ -26,14 +26,15 @@
  
   {{#if blogs.length}}
   <div class="col-md-6 blog-list">
-    <h3>Current Blog Posts:</h3>
+    <h3 class="pb-4 text-2xl">Current Blog Posts:</h3>
     {{#each blogs as |blog|}}
     <div class="row mb-2">
       <div class="col-md-8">
-        <h4><a href="/blogs/{{blog.id}}">{{blog.title}}</a></h4>
+        <h4 class="text-2xl"><span class="text-xl pr-6">Go to:</span><a href="/blogs/{{blog.id}}">     {{blog.title}}</a></h4>
       </div>
       <div class="col-md-4">
         <button class="btn btn-sm btn-danger" data-id="{{blog.id}}">DELETE</button>
+        <a href='/dashboard/edit-post/{{blog.id}}'> <button class="btn btn-sm btn-info">Edit Post</button></a>
       </div>
     </div>
     {{/each}}

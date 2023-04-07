@@ -22,3 +22,17 @@ header, .project:not(:last-child) {
   font-weight: bold;
   margin-left: -5px;
 }
+.blog-post{
+  border: solid black 5px;
+  text-align: center;
+}
+.blog-title{
+  background-color: #018749;
+  color:white;
+  font-size: 30px;
+  padding:20px
+}
+.blog-content{
+  padding: 30px;
+  background-color: #ACE1AF;
+}

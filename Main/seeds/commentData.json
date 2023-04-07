@@ -1,21 +1,21 @@
 [
     {
-        "comment_content":"Nice Post",
+        "commentText":"Nice Post",
         "blog_id": "1",
         "user_id": "1"
     },
     {
-        "comment_content":"Great Read",
+        "commentText":"Great Read",
         "blog_id": "2",
         "user_id": "2"
     },
     {
-        "comment_content":"I Agree!",
+        "commentText":"I Agree!",
         "blog_id": "3",
         "user_id": "2"
     },
     {
-        "comment_content":"Very insightful!",
+        "commentText":"Very insightful!",
         "blog_id": "4",
         "user_id": "1"
     }

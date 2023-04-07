@@ -4,10 +4,11 @@ const withAuth = require('../../utils/auth')
 
 
 //Get all blogs with associated Users and comments
-router.get("/", (req, res) => {
-    Blog.findAll({
+router.get("/", async (req, res) => {
+    await Blog.findAll({
        include: [{
         model:Comment,
+        attributes:['commentText'],
         include: {
             model:User,
             attributes: ['username']
@@ -26,11 +27,12 @@ router.get("/", (req, res) => {
 });
 
 //get one blog with associated user and comment
-router.get('/:id', (req, res) => {
-    Blog.findByPk(req.params.id, {
-        attributes: ['title'],
+router.get('/:id', async (req, res) => {
+    await Blog.findByPk(req.params.id, {
+        attributes: ['title', 'blog_content'],
        include: [{
         model:Comment,
+        attributes: ['commentText'],
         include: {
             model:User,
             attributes: ['username']
@@ -62,8 +64,8 @@ router.post("/", (req, res) => {
         res.status(500).json(err)
     })
 })
-router.put('/:id', (req, res) => {
-    Blog.update({
+router.put('/:id', async (req, res) => {
+    await Blog.update({
         title: req.body.title,
         blog_content: req.body.blog_content
     },
